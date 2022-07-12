@@ -1,0 +1,45 @@
+header{
+    background-color: white;
+    grid-area: header;
+    @include flexible(space-around);
+    .logo{
+        img{
+            height: 140px;
+            width: 140px;
+        }
+    }
+    #lista{
+        @include flexible(center);
+        text-align: center;
+        li{
+            text-align: center;
+            background-color: $nav-color;
+            font-family: 'Roboto', sans-serif;
+            border-radius: 5px;
+            margin: 0.7rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            padding: 0.2rem;
+            &:hover{
+                background-color: cadetblue;
+            }
+            a{
+                text-decoration: none;
+                color: $text-color;
+                &:hover{
+                    color: $text-color;
+                }
+            }
+        }
+    }
+    .assets{
+        display: flex;
+        flex-direction: row;
+        #carritoLogo{
+            #carrito-elementos{
+                color: white;
+                background: black;
+            }
+        }
+    }
+}

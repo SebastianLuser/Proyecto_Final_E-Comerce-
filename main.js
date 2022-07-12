@@ -28,7 +28,7 @@ arrayProductos.push(producto1);
 arrayProductos.push(producto2);
 arrayProductos.push(producto3);
 arrayProductos.push(producto4);
-
+    //favoritos == NULL ? favoritos = []:"";
 function mostrarCards(arrayProductos){
     const cotenedorCards = document.getElementById("contenedor-cards");
     cotenedorCards.innerHTML = "";
@@ -69,8 +69,9 @@ function mostrarCards(arrayProductos){
 
 function agregarFavoritos(arrayProductos){
     let favoritos = JSON.parse(localStorage.getItem("carrito"));
-    //Utilizo un if ternario
-    favoritos == NULL ? favoritos = []:"";
+    if(favoritos == null){
+        favoritos = [];
+    }
     favoritos.push(arrayProductos)
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
 }
@@ -79,7 +80,9 @@ document.getElementById("ver-favoritos").addEventListener("click",verFavoritos);
 
 function verFavoritos(){
     let favoritos = JSON.parse(localStorage.getItem("favoritos"));
-    favoritos == NULL ? favoritos = []:"";
+    if(favoritos==null){
+        favoritos=[];
+    }
     mostrarCards(favoritos);
 }
 

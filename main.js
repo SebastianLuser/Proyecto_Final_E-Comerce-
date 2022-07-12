@@ -28,7 +28,7 @@ arrayProductos.push(producto1);
 arrayProductos.push(producto2);
 arrayProductos.push(producto3);
 arrayProductos.push(producto4);
-    //favoritos == NULL ? favoritos = []:"";
+
 function mostrarCards(arrayProductos){
     const cotenedorCards = document.getElementById("contenedor-cards");
     cotenedorCards.innerHTML = "";
@@ -69,6 +69,7 @@ function mostrarCards(arrayProductos){
 
 function agregarFavoritos(arrayProductos){
     let favoritos = JSON.parse(localStorage.getItem("carrito"));
+    //favoritos == NULL ? favoritos = []:"";
     if(favoritos == null){
         favoritos = [];
     }
@@ -80,6 +81,7 @@ document.getElementById("ver-favoritos").addEventListener("click",verFavoritos);
 
 function verFavoritos(){
     let favoritos = JSON.parse(localStorage.getItem("favoritos"));
+    //favoritos == NULL ? favoritos = []:"";
     if(favoritos==null){
         favoritos=[];
     }
@@ -96,23 +98,23 @@ mostrarCards(arrayProductos);
 //Filtro por categoria
 function filtrarPorCategoria(categoria){
     const ListadoFiltrado = arrayProductos.filter((producto)=> producto.categoria == categoria);
-    generarCards(ListadoFiltrado);
+    mostrarCards(ListadoFiltrado);
 }
 function PrecioMayorMenor(){
     arrayProductos.sort((a,b)=>b.precio-a.precio);
-    generarCards(arrayProductos);
+    mostrarCards(arrayProductos);
 }
 function PrecioMenorMayor(){
     arrayProductos.sort((a,b)=>a.precio-b.precio);
-    generarCards(arrayProductos);
+    mostrarCards(arrayProductos);
 }
 function IdMayorMenor(){
     arrayProductos.sort((a,b)=>b.id-a.id);
-    generarCards(arrayProductos);
+    mostrarCards(arrayProductos);
 }
 function IdMenorMayor(){
     arrayProductos.sort((a,b)=>a.id-b.id);
-    generarCards(arrayProductos);
+    mostrarCards(arrayProductos);
 }
 function Alfabeticamente(){
     arrayProductos.sort((a,b)=>{
@@ -124,7 +126,7 @@ function Alfabeticamente(){
             }
             return 0;
         })
-    generarCards(arrayProductos);
+        mostrarCards(arrayProductos);
 }
 
 //AGREGA AL CARRITO LOS PRODUCTOS SELECCIONADOS

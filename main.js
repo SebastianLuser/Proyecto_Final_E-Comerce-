@@ -22,7 +22,6 @@ const producto2 = new Producto ({id:2, titulo: "D&N",precio: 500 ,categoria:"ave
 const producto3 = new Producto ({id:3, titulo: "Catan",precio: 100 ,categoria:"estrategia",stock:10});
 const producto4 = new Producto ({id:4, titulo: "Teg",precio: 300 ,categoria:"estrategia",stock:10});
 
-// const arrayProductos = [producto1,producto2,producto3,producto4];
 const arrayProductos = [];
 arrayProductos.push(producto1);
 arrayProductos.push(producto2);
@@ -52,7 +51,7 @@ function mostrarCards(arrayProductos){
             </div>
             <!-- Product actions-->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center"><a onclick="agregarAlCarrito(${producto.id})" class="btn btn-outline-dark mt-auto" href="#" onclick="agregarAlCarrito()" >Add to cart</a></div>
+                <div class="text-center"><a onclick="agregarAlCarrito(${producto.id})" class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
             </div>
         </div>
     </div>
@@ -69,10 +68,11 @@ function mostrarCards(arrayProductos){
 
 function agregarFavoritos(arrayProductos){
     let favoritos = JSON.parse(localStorage.getItem("carrito"));
-    //favoritos == NULL ? favoritos = []:"";
-    if(favoritos == null){
-        favoritos = [];
-    }
+    favoritos == null ?? [];
+    // favoritos == null ? favoritos = []:"";
+    // if(favoritos == null){
+    //     favoritos = [];
+    // }
     favoritos.push(arrayProductos)
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
 }
@@ -81,10 +81,10 @@ document.getElementById("ver-favoritos").addEventListener("click",verFavoritos);
 
 function verFavoritos(){
     let favoritos = JSON.parse(localStorage.getItem("favoritos"));
-    //favoritos == NULL ? favoritos = []:"";
-    if(favoritos==null){
-        favoritos=[];
-    }
+    favoritos == null ?? [];
+    // if(favoritos==null){
+    //     favoritos=[];
+    // }
     mostrarCards(favoritos);
 }
 
@@ -188,9 +188,30 @@ function verificarStock(id){
                 producto.stock = producto.stock -1;
                 console.log("Hay "+producto.stock+" stock restante")
                 habilitar=true;
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Se agrego al carrito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         }else{
-            console.log("No hay stock");
+            if (producto.id == hayStock.id){
+                Toastify({
+                    text: "No hay stock",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "left", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                console.log("No hay stock");
+            }
             document.getElementById("card"+producto.id);
             habilitar = false;
             //Spread para crear un nuevo objeto con un sinStock
